@@ -1,10 +1,9 @@
-var GasStation = [
+var gasStationArray = [
     {"Brand":"Shell","Price":2.19, "longitude":-84.407868,"latitude":33.781799},
     {"Brand":"Shell","Price":2.39, "longitude":-84.398881,"latitude":33.778463},
 ];
-var carLocate = [
-	{"longitude":-84.407868 ,"latitude":33.781799}
-];
+var carLocation = {"longitude":-84.407868 ,"latitude":33.781799};
+var remainingRange = 60;
 var point1 = {"longitude":-84.407868 ,"latitude":33.781799};
 var point2 =  {"longitude":-84.398881 ,"latitude":33.778463};
 
@@ -24,7 +23,22 @@ function distance(p1,p2) {
 	return dist
 }
 function getNearestGasStation (remainingRange,gasStationArray,carLocation)
-{
+{	
+	var distanceArray = [];
+	for (i = 0; i < gasStationArray.length; i++) 
+	{ 
+		var gasStationLocate = {"longitude":gasStationArray[i].longitude,"latitude":gasStationArray[i].latitude}
+    	distanceTemp = distance(carLocation,gasStationLocate);
+    	if(distanceTemp>remainingRange)
+    	{
+    		gasStationLocate.splice(i,1);
+    	}
+    	else
+    	{
+    		distanceArray.push(distanceTemp);
+    	}
 
+    }
+	
 
 }
