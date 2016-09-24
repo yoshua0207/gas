@@ -52,7 +52,7 @@ class Welcome extends Component {
                 <GMap
                     origin={this.state.origin}
                     end={this.state.end}
-                    waypoint={this.state.wayPointList}/>
+                    waypoints={this.state.wayPointList}/>
             </div>
         );
     }

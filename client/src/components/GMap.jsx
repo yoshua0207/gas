@@ -6,9 +6,8 @@ import React, { Component } from "react";
 class GMap extends Component {
     constructor(props) {
         super(props);
-        this._bind("_fetchRoute", "_showWayPoints");
+        this._bind("_fetchRoute");
         this.state = {};    // put get initial state here instead
-        this.marker = [];
         this.directionsService = new google.maps.DirectionsService();
         this.directionsDisplay = new google.maps.DirectionsRenderer();
     }
@@ -44,31 +43,23 @@ class GMap extends Component {
         methods.forEach((method) => this[method] = this[method].bind(this));
     }
 
-    _showWayPoints(route) {
-        this.marker = this.marker.map(
-            mark => mark || new google.maps.Marker
-        );
-        route.steps.forEach((step, i) => {
-            this.marker[i].setMap(this.map);
-            this.marker[i].setPosition(step.start_location);
-        });
-    }
-
     _fetchRoute(origin, end) {
-        // remove any existing markers from the map.
-        this.marker.forEach(mark => mark.setMap(null));
-
+        console.log(this.props.waypoints.map(
+            point => `${point.location.lat},${point.location.lon}`));
         this.directionsService.route(
             {
                 origin     : `${origin.lat},${origin.lon}`,
                 destination: `${end.lat},${end.lon}`,
-                travelMode : "DRIVING"
+                travelMode : "DRIVING",
+                waypoints  : this.props.waypoints.map(
+                    point => ({
+                        location: `${point.location.lat},${point.location.lon}`
+                    }))
             },
             (response, status) => {
                 console.log(response, status);
                 if (status === "OK") {
                     this.directionsDisplay.setDirections(response);
-                    this._showWayPoints(response.routes[0].legs[0]);
                 } else {
                     alert(`Directions request failed due to ${status}`);
                 }
