@@ -57,7 +57,7 @@ function getAPIRequest(latitude,longitude,distance,type)
   	if (!error && response.statusCode == 200) 
   	{
   		subBody = body.substring(body.search(/{\s*"status"[\s\S]+}/m))
-    	console.log(subBody) // Show the HTML for the Google homepage.
+    		console.log(subBody) // Show the HTML for the Google homepage.
   	}
 	})
 }
