@@ -24,6 +24,7 @@ function distance(p1,p2) {
 }
 function getNearestGasStation (remainingRange,gasStationArray,carLocation)
 {	
+	var tresholdRange = 60;
 	var distanceArray = [];
 	for (i = 0; i < gasStationArray.length; i++) 
 	{ 
@@ -33,12 +34,30 @@ function getNearestGasStation (remainingRange,gasStationArray,carLocation)
     	{
     		gasStationLocate.splice(i,1);
     	}
+    	else if(distanceTemp<remainingRange-tresholdRange)
+    	{
+    		gasStationLocate.splice(i,1);
+    		
+    	}
     	else
     	{
     		distanceArray.push(distanceTemp);
     	}
-
     }
-	
+    priceArray = gasStationArray.map(function(e){return e.Price;})
+	var indexOfMinValue = priceArray.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);	
+	return gasStationArray[indexOfMinValue];
+}
 
+function getAPIRequest(latitude,longitude,distance,type)
+{
+	var request = require('request');
+	request('http://devapi.mygasfeed.com/stations/radius/'+latitude+'/'+longitude+'/'+distance+'/'+'type'+'/Distance/rfej9napna.json?', function (error, response, body) 
+	{
+  	if (!error && response.statusCode == 200) 
+  	{
+  		subBody = body.substring(body.search(/{\s*"status"[\s\S]+}/m))
+    	console.log(subBody) // Show the HTML for the Google homepage.
+  	}
+	})
 }
