@@ -77,3 +77,7 @@ function getAPIRequest(latitude,longitude,distance,type)
 	}
 	return listOfStations;
 }
+function filterBrand(body,brand)
+{
+	var found = body.filter(function(item) { return item.station === brand; });
+}
