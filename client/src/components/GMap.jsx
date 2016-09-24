@@ -36,6 +36,7 @@ class GMap extends Component {
                 lng: nextProps.startLon
             }
         );
+
     }
 
     _bind(...methods) {
