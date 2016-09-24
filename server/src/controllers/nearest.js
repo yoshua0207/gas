@@ -57,7 +57,23 @@ function getAPIRequest(latitude,longitude,distance,type)
   	if (!error && response.statusCode == 200) 
   	{
   		subBody = body.substring(body.search(/{\s*"status"[\s\S]+}/m))
-    		console.log(subBody) // Show the HTML for the Google homepage.
+    	console.log(subBody) // Show the HTML for the Google homepage.
   	}
 	})
+	listOfStations = subBody.stations;
+	for(i=0;i<listOfStations.length;i++)
+	{
+		delete listOfStations[i].country;
+		delete listOfStations[i].zip;
+		delete listOfStations[i].reg_date;
+		delete listOfStations[i].mid_date;
+		delete listOfStations[i].pre_date;
+		delete listOfStations[i].diesel_date;
+		delete listOfStations[i].address;
+		delete listOfStations[i].diesel;
+		delete listOfStations[i].id;
+		delete listOfStations[i].region;
+		delete listOfStations[i].city;
+	}
+	return listOfStations;
 }
