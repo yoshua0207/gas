@@ -1,7 +1,7 @@
 {
-  "name": "api-server-starter-kit",
+  "name": "gas",
   "version": "0.0.1",
-  "description": "Starter Kit to build api server complete with authentication",
+  "description": "",
   "main": "build/app-server.js",
   "scripts": {
     "startd": "nodemon build/app-server.js",
@@ -38,13 +38,5 @@
     "eslint": "^3.5.0",
     "eslint-plugin-react": "^6.2.2",
     "webpack": "^1.13.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/4n3ver/APIServerStarter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/4n3ver/APIServerStarter/issues"
-  },
-  "homepage": "https://github.com/4n3ver/APIServerStarter#readme"
+  }
 }
